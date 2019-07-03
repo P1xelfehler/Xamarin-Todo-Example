@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using ToDo.DataStore;
 using ToDo.Pages.Create;
 using ToDo.Pages.Overview.ViewModels;
@@ -20,11 +19,7 @@ namespace ToDo
 
         protected override void OnAppearing()
         {
-            var items = DataStorage
-                .getInstance()
-                .fetchItems();
-            viewModel.Clear();
-            viewModel.AddItems(items);
+            viewModel.LoadItems();
         }
 
         public void OnItemTapped(ListView _, ItemTappedEventArgs args)

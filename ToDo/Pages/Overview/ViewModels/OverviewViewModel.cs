@@ -11,13 +11,12 @@ namespace ToDo.Pages.Overview.ViewModels
             new TodoGroup("Erledigt")
         };
 
-        public void Clear()
+        public void LoadItems()
         {
+            var items = DataStorage
+                .getInstance()
+                .fetchItems();
             Groups.ForEach(group => group.Clear());
-        }
-
-        public void AddItems(List<ToDoItem> items)
-        {
             items.ForEach(item => Groups[item.IsChecked ? 1 : 0].Add(item));
         }
     }
