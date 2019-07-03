@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using ToDo.DataStore;
-using ToDo.Pages.ToDoView.ViewModels;
+using ToDo.ViewModels;
 using Xamarin.Forms;
 
 namespace ToDo.Pages.ToDoView

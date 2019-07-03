@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ToDo.Model;
 
-namespace ToDo.Pages.Overview.ViewModels
+namespace ToDo.ViewModels
 {
     public class OverviewViewModel
     {

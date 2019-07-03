@@ -1,7 +1,7 @@
 ﻿using System;
 using ToDo.DataStore;
 
-namespace ToDo.Pages.ToDoView.ViewModels
+namespace ToDo.ViewModels
 {
     public class TodoViewViewModel
     {

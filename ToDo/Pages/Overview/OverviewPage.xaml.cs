@@ -1,11 +1,11 @@
 ﻿using System;
 using ToDo.DataStore;
 using ToDo.Pages.Create;
-using ToDo.Pages.Overview.ViewModels;
 using ToDo.Pages.ToDoView;
+using ToDo.ViewModels;
 using Xamarin.Forms;
 
-namespace ToDo
+namespace ToDo.Pages.Overview
 {
     public partial class OverviewPage : ContentPage
     {
