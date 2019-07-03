@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace ToDo.Pages.Create
 {
-    public partial class Create : ContentPage
+    public partial class CreatePage : ContentPage
     {
-        public Create()
+        public CreatePage()
         {
             InitializeComponent();
         }

@@ -31,7 +31,7 @@ namespace ToDo
 
         public void AddButtonTapped(object sender, EventArgs args)
         {
-            var destination = new Create();
+            var destination = new CreatePage();
             Navigation.PushModalAsync(destination);
         }
     }
