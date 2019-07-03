@@ -6,29 +6,37 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
   <ContentPage.ToolbarItems>
-        
+
     <ToolbarItem
       Name="Add"
       Clicked="AddButtonTapped" />
   </ContentPage.ToolbarItems>
 
   <ContentPage.Content>
-        
+
     <ListView
       x:Name="listView"
+      GroupDisplayBinding="{Binding Title}"
+      IsGroupingEnabled="true"
       ItemTapped="OnItemTapped"
       ItemsSource="{Binding Groups}"
-      IsGroupingEnabled="true"
-      GroupDisplayBinding="{Binding Title}">
-            
+      RowHeight="50">
+
       <ListView.ItemTemplate>
-                
+
         <DataTemplate>
-                    
-          <TextCell
-            Text="{Binding Title}"
-            Detail="{Binding IsChecked}"
-            TextColor="Black" />
+
+          <ViewCell>
+
+            <StackLayout
+              Padding="16"
+              Orientation="Horizontal"
+              VerticalOptions="Center">
+              <Label Text="{Binding Title}" />
+              <ContentView HorizontalOptions="FillAndExpand" />
+              <Label Text="{Binding IsChecked}" />
+            </StackLayout>
+          </ViewCell>
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
