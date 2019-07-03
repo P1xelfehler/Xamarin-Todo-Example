@@ -6,11 +6,11 @@ using Xamarin.Forms;
 
 namespace ToDo.Pages.ToDoView
 {
-    public partial class ToDoView : ContentPage
+    public partial class TodoViewPage : ContentPage
     {
         private TodoViewViewModel viewModel;
 
-        public ToDoView(ToDoItem item)
+        public TodoViewPage(ToDoItem item)
         {
             InitializeComponent();
             viewModel = new TodoViewViewModel(item);

@@ -25,7 +25,7 @@ namespace ToDo
         public void OnItemTapped(ListView _, ItemTappedEventArgs args)
         {
             var item = (ToDoItem) args.Item;
-            var destination = new ToDoView(item);
+            var destination = new TodoViewPage(item);
             Navigation.PushAsync(destination);
         }
 
