@@ -34,7 +34,7 @@
               VerticalOptions="Center">
               <Label Text="{Binding Title}" />
               <ContentView HorizontalOptions="FillAndExpand" />
-              <Label Text="{Binding IsChecked}" />
+              <Image Source="{Binding ImageSource}" />
             </StackLayout>
           </ViewCell>
         </DataTemplate>

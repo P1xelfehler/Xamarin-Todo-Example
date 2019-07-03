@@ -1,4 +1,6 @@
 ﻿using System;
+using Xamarin.Forms;
+
 namespace ToDo.DataStore
 {
     public struct ToDoItem
@@ -6,6 +8,13 @@ namespace ToDo.DataStore
         public int Id { get; }
         public string Title { get; }
         public bool IsChecked { get; set; }
+        public string ImageSource
+        {
+            get
+            {
+                return IsChecked ? "check.jpg" : null;
+            }
+        }
 
         public ToDoItem(int id, string title)
         {
