@@ -23,4 +23,12 @@
     <Folder Include="Pages\Overview\ViewModels\" />
     <Folder Include="Pages\ToDoView\ViewModels\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Pages\Overview\Overview.xaml.cs">
+      <DependentUpon>OverviewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Pages\Overview\OverviewPage.xaml.cs">
+      <DependentUpon>OverviewPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

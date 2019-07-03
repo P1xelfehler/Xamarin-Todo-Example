@@ -10,7 +10,7 @@ namespace ToDo
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Overview());
+            MainPage = new NavigationPage(new OverviewPage());
         }
 
         protected override void OnStart()

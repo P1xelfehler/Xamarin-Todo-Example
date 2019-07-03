@@ -7,11 +7,11 @@ using Xamarin.Forms;
 
 namespace ToDo
 {
-    public partial class Overview : ContentPage
+    public partial class OverviewPage : ContentPage
     {
         public OverviewViewModel viewModel = new OverviewViewModel();
 
-        public Overview()
+        public OverviewPage()
         {
             InitializeComponent();
             BindingContext = viewModel;

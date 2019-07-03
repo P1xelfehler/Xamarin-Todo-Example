@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using ToDo.DataStore;
 using ToDo.Model;
 
 namespace ToDo.Pages.Overview.ViewModels
