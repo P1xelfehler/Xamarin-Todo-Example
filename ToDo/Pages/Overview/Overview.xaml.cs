@@ -39,17 +39,5 @@ namespace ToDo
             var destination = new Create();
             Navigation.PushModalAsync(destination);
         }
-
-        private int indexOf(ToDoItem item, Collection<ToDoItem> collection)
-        {
-            for (var i = 0; i < collection.Count; i++)
-            {
-                if (collection[i].Id == item.Id)
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
     }
 }
