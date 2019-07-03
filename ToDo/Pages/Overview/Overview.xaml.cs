@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
 using ToDo.DataStore;
+using ToDo.Model;
 using ToDo.Pages.Create;
 using ToDo.Pages.ToDoView;
 using Xamarin.Forms;
@@ -14,7 +12,11 @@ namespace ToDo
 {
     public partial class Overview : ContentPage
     {
-        public ObservableCollection<ToDoItem> Items { get; set; } = new ObservableCollection<ToDoItem>();
+        //public ObservableCollection<ToDoItem> Items { get; set; } = new ObservableCollection<ToDoItem>();
+        public List<TodoGroup> Groups { get; } = new List<TodoGroup> {
+            new TodoGroup("Unerledigt"),
+            new TodoGroup("Erledigt")
+        };
 
         public Overview()
         {
@@ -25,22 +27,16 @@ namespace ToDo
 
         protected override void OnAppearing()
         {
-            Items.Clear();
+            Groups.ForEach(group => group.Clear());
             DataStorage
                 .getInstance()
                 .fetchItems()
-                .ForEach(x =>
-                {
-                    if (!Items.Any(item => item.Id == x.Id))
-                    {
-                        Items.Add(x);
-                    }
-                });
+                .ForEach(item => Groups[item.IsChecked ? 1 : 0].Add(item));
         }
 
-        public void OnItemTapped(ListView listView, ItemTappedEventArgs args)
+        public void OnItemTapped(ListView _, ItemTappedEventArgs args)
         {
-            var item = Items[args.ItemIndex];
+            var item = (ToDoItem) args.Item;
             var destination = new ToDoView(item);
             Navigation.PushAsync(destination);
         }
