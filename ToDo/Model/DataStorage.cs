@@ -15,7 +15,7 @@ namespace ToDo
 
         private DataStorage() { }
 
-        public static DataStorage getInstance()
+        public static DataStorage GetInstance()
         {
             if (instance == null)
             {
@@ -24,7 +24,7 @@ namespace ToDo
             return instance;
         }
 
-        public List<ToDoItem> fetchItems()
+        public List<ToDoItem> FetchItems()
         {
             return items;
         }

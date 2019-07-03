@@ -19,7 +19,7 @@ namespace ToDo.Pages.Create
             {
                 return;
             }
-            DataStorage.getInstance().AddItem(title);
+            DataStorage.GetInstance().AddItem(title);
             Navigation.PopModalAsync();
         }
     }

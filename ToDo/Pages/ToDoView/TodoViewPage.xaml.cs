@@ -20,7 +20,7 @@ namespace ToDo.Pages.ToDoView
         public void DeleteButtonTapped(object sender, EventArgs args)
         {
             DataStorage
-                .getInstance()
+                .GetInstance()
                 .RemoveItem(viewModel.Item.Id);
             Navigation.PopAsync();
         }
@@ -30,7 +30,7 @@ namespace ToDo.Pages.ToDoView
             var item = viewModel.Item;
             item.IsChecked = !item.IsChecked;
             DataStorage
-                .getInstance()
+                .GetInstance()
                 .UpdateItem(item);
             Navigation.PopAsync();
         }
