@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using ToDo.DataStore;
 
 namespace ToDo
@@ -7,7 +7,7 @@ namespace ToDo
     {
         private static DataStorage instance;
 
-        private ObservableCollection<ToDoItem> items = new ObservableCollection<ToDoItem> {
+        private List<ToDoItem> items = new List<ToDoItem> {
             new ToDoItem(0, "Get"),
             new ToDoItem(1, "Shit"),
             new ToDoItem(2, "Done")
@@ -24,7 +24,7 @@ namespace ToDo
             return instance;
         }
 
-        public ObservableCollection<ToDoItem> fetchItems()
+        public List<ToDoItem> fetchItems()
         {
             return items;
         }

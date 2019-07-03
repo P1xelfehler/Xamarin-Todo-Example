@@ -20,5 +20,7 @@
     <Folder Include="Pages\Create\" />
     <Folder Include="Pages\ToDoView\" />
     <Folder Include="Model\" />
+    <Folder Include="Pages\Overview\ViewModels\" />
+    <Folder Include="Pages\ToDoView\ViewModels\" />
   </ItemGroup>
 </Project>

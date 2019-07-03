@@ -9,7 +9,7 @@
     <StackLayout Padding="10">
 
       <Label
-        Text="{Binding Title}"
+        Text="{Binding Item.Title}"
         FontSize="Large"
         HorizontalOptions="Center"
         Margin="0,50"
