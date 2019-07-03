@@ -28,7 +28,7 @@ namespace ToDo.Pages.ToDoView
         public void DoneButtonTapped(object sender, EventArgs args)
         {
             var item = viewModel.Item;
-            item.IsChecked = true;
+            item.IsChecked = !item.IsChecked;
             DataStorage
                 .getInstance()
                 .UpdateItem(item);

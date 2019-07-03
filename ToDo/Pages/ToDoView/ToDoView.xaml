@@ -16,7 +16,7 @@
         VerticalOptions="FillAndExpand" />
 
       <Button
-        Text="Erledigt"
+        Text="{Binding DoneButtonTitle}"
         Clicked="DoneButtonTapped" />
 
       <Button
