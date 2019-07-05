@@ -5,29 +5,30 @@
   xmlns="http://xamarin.com/schemas/2014/forms"
   xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    
+
   <ContentPage.Content>
-        
+
     <StackLayout Padding="10">
-            
+
       <Label
         Text="Add TODO"
         FontSize="Large"
         HorizontalOptions="Center"
         Margin="0,0,0,10" />
-            
+
       <Entry
         x:Name="entry"
+        Text="{Binding EntryText}"
         Placeholder="What do you want to do?" />
-            
+
       <ContentView VerticalOptions="FillAndExpand" />
-            
+
       <Button
         Text="Add TODO"
         Command="{Binding AddCommand}" />
-            
+
     </StackLayout>
-        
+
   </ContentPage.Content>
-    
+
 </ContentPage>

@@ -7,6 +7,7 @@ namespace ToDo.ViewModels
     public class CreateViewHolder
     {
         public ICommand AddCommand { private set; get; }
+        public string EntryText { get; set; }
         private INavigation Navigation { set; get; }
 
         public CreateViewHolder(INavigation navigation)
@@ -16,7 +17,7 @@ namespace ToDo.ViewModels
             {
                 DataStorage
                     .GetInstance()
-                    .AddItem("Test");
+                    .AddItem(EntryText);
                 Navigation.PopModalAsync();
             });
         }
