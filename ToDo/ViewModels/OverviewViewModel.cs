@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Input;
+using ToDo.Constants;
 using ToDo.DataStore;
 using ToDo.Model;
 using ToDo.Pages.Create;
@@ -14,6 +15,11 @@ namespace ToDo.ViewModels
         public ICommand AddCommand { private set; get; }
         public ICommand ItemSelectedCommand { private set; get; }
         public INavigation Navigation { set; get; }
+
+        public List<TodoGroup> Groups { get; } = new List<TodoGroup> {
+            new TodoGroup("Unerledigt"),
+            new TodoGroup("Erledigt")
+        };
 
         public OverviewViewModel(INavigation navigation)
         {
@@ -30,20 +36,34 @@ namespace ToDo.ViewModels
                 var destination = new TodoViewPage(item);
                 Navigation.PushAsync(destination);
             });
+            loadItems();
+            registerItemAddedReceiver();
         }
 
-        public List<TodoGroup> Groups { get; } = new List<TodoGroup> {
-            new TodoGroup("Unerledigt"),
-            new TodoGroup("Erledigt")
-        };
+        ~OverviewViewModel()
+        {
+            unregisterReceivers();
+        }
 
-        public void LoadItems()
+        private void loadItems()
         {
             var items = DataStorage
                 .GetInstance()
                 .FetchItems();
-            Groups.ForEach(group => group.Clear());
             items.ForEach(item => Groups[item.IsChecked ? 1 : 0].Add(item));
+        }
+
+        private void registerItemAddedReceiver()
+        {
+            MessagingCenter.Subscribe<DataStorage, ToDoItem>(this, MessengerKeys.ItemAdded, (_, item) =>
+            {
+                Groups[item.IsChecked ? 1 : 0].Insert(0, item);
+            });
+        }
+
+        private void unregisterReceivers()
+        {
+            MessagingCenter.Unsubscribe<DataStorage, ToDoItem>(this, MessengerKeys.ItemAdded);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using ToDo.Constants;
 using ToDo.DataStore;
+using Xamarin.Forms;
 
 namespace ToDo
 {
@@ -29,11 +31,11 @@ namespace ToDo
             return items;
         }
 
-        public ToDoItem AddItem(string title)
+        public void AddItem(string title)
         {
             var item = new ToDoItem(items.Count, title);
             items.Add(item);
-            return item;
+            MessagingCenter.Send(this, MessengerKeys.ItemAdded, item);
         }
 
         public void RemoveItem(int id)

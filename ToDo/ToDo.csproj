@@ -23,6 +23,7 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Behaviors\" />
     <Folder Include="Repositories\" />
+    <Folder Include="Constants\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Pages\Overview\Overview.xaml.cs">
