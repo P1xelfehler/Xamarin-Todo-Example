@@ -45,6 +45,7 @@ namespace ToDo
                 if (items[i].Id == id)
                 {
                     items.RemoveAt(i);
+                    MessagingCenter.Send(this, MessengerKeys.ItemDeleted, id);
                     break;
                 }
             }
@@ -57,6 +58,7 @@ namespace ToDo
                 if (items[i].Id == item.Id)
                 {
                     items[i] = item;
+                    MessagingCenter.Send(this, MessengerKeys.ItemChanged, item);
                     break;
                 }
             }
