@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using ToDo.ViewModels;
+﻿using ToDo.ViewModels;
 using Xamarin.Forms;
 
 namespace ToDo.Pages.Create

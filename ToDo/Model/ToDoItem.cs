@@ -1,7 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-
-namespace ToDo.DataStore
+﻿namespace ToDo.DataStore
 {
     public struct ToDoItem
     {

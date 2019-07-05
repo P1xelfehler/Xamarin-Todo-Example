@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using ToDo.DataStore;
 using Xamarin.Forms;
 

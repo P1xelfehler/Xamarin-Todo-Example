@@ -1,5 +1,4 @@
-﻿using System;
-using ToDo.DataStore;
+﻿using ToDo.DataStore;
 using ToDo.ViewModels;
 using Xamarin.Forms;
 
