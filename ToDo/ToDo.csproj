@@ -21,6 +21,8 @@
     <Folder Include="Pages\ToDoView\" />
     <Folder Include="Model\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Pages\Overview\Overview.xaml.cs">

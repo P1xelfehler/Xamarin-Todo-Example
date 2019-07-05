@@ -12,26 +12,8 @@ namespace ToDo.Pages.ToDoView
         public TodoViewPage(ToDoItem item)
         {
             InitializeComponent();
-            viewModel = new TodoViewViewModel(item);
+            viewModel = new TodoViewViewModel(item, Navigation);
             BindingContext = viewModel;
-        }
-
-        public void DeleteButtonTapped(object sender, EventArgs args)
-        {
-            DataStorage
-                .GetInstance()
-                .RemoveItem(viewModel.Item.Id);
-            Navigation.PopAsync();
-        }
-
-        public void DoneButtonTapped(object sender, EventArgs args)
-        {
-            var item = viewModel.Item;
-            item.IsChecked = !item.IsChecked;
-            DataStorage
-                .GetInstance()
-                .UpdateItem(item);
-            Navigation.PopAsync();
         }
     }
 }

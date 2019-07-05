@@ -3,13 +3,15 @@
   Title="To Do"
   x:Class="ToDo.Pages.Overview.OverviewPage"
   xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:behaviors="clr-namespace:ToDo.Behaviors"
+  xmlns:viewModels="clr-namespace:ToDo.ViewModels"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-  
+
   <ContentPage.ToolbarItems>
 
     <ToolbarItem
       Name="Add"
-      Clicked="AddButtonTapped" />
+      Command="{Binding AddCommand}" />
   </ContentPage.ToolbarItems>
 
   <ContentPage.Content>
@@ -18,9 +20,14 @@
       x:Name="listView"
       GroupDisplayBinding="{Binding Title}"
       IsGroupingEnabled="true"
-      ItemTapped="OnItemTapped"
       ItemsSource="{Binding Groups}"
       RowHeight="50">
+
+      <ListView.Behaviors>
+        <behaviors:EventToCommandBehavior
+          Command="{Binding ItemSelectedCommand}"
+          EventName="ItemTapped" />
+      </ListView.Behaviors>
 
       <ListView.ItemTemplate>
 

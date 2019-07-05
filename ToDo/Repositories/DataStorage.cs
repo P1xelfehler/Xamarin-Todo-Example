@@ -29,10 +29,11 @@ namespace ToDo
             return items;
         }
 
-        public void AddItem(string title)
+        public ToDoItem AddItem(string title)
         {
             var item = new ToDoItem(items.Count, title);
             items.Add(item);
+            return item;
         }
 
         public void RemoveItem(int id)

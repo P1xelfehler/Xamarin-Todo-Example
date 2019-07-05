@@ -16,12 +16,12 @@
         VerticalOptions="FillAndExpand" />
 
       <Button
-        Text="{Binding DoneButtonTitle}"
-        Clicked="DoneButtonTapped" />
+        Text="{Binding ChangeStateButtonTitle}"
+        Command="{Binding ChangeStateCommand}" />
 
       <Button
         Text="Löschen"
-        Clicked="DeleteButtonTapped"
+        Command="{Binding DeleteCommand}"
         TextColor="Red" />
 
     </StackLayout>
