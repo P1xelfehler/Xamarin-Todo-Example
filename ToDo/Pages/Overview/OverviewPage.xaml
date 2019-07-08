@@ -39,7 +39,7 @@
               Padding="16"
               Orientation="Horizontal"
               VerticalOptions="Center">
-              <Label Text="{Binding Title}" />
+              <Label Text="{Binding Item.Title}" />
               <ContentView HorizontalOptions="FillAndExpand" />
               <Image Source="{Binding ImageSource}" />
             </StackLayout>

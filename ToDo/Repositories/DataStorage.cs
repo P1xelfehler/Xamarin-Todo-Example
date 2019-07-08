@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using SQLite;
 using ToDo.Constants;
@@ -18,7 +19,10 @@ namespace ToDo
 
         private SQLiteConnection Database => database ?? (database = new SQLiteConnection(databasePath));
 
-        private DataStorage() => Database.CreateTable<ToDoItem>();
+        private DataStorage() {
+            Database.CreateTable<ToDoItem>();
+            Debug.WriteLine(databasePath);
+        }
 
         ~DataStorage() {
             Database.Close();

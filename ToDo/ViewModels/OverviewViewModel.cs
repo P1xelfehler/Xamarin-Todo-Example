@@ -53,7 +53,7 @@ namespace ToDo.ViewModels
             var items = DataStorage
                 .GetInstance()
                 .FetchItems();
-            items.ForEach(item => Groups[item.IsChecked ? 1 : 0].Add(item));
+            items.ForEach(item => Groups[item.IsChecked ? 1 : 0].Add(new ToDoItemViewModel(item)));
         }
 
         private void registerReceivers()
@@ -61,7 +61,7 @@ namespace ToDo.ViewModels
             // item added
             MessagingCenter.Subscribe<DataStorage, ToDoItem>(this, MessengerKeys.ItemAdded, (_, item) =>
             {
-                Groups[item.IsChecked ? 1 : 0].Insert(0, item);
+                Groups[item.IsChecked ? 1 : 0].Insert(0, new ToDoItemViewModel(item));
             });
             // item changed
             MessagingCenter.Subscribe<DataStorage, ToDoItem>(this, MessengerKeys.ItemChanged, (_, item) =>
@@ -70,16 +70,16 @@ namespace ToDo.ViewModels
                 {
                     for (var itemIndex = 0; itemIndex < Groups[groupIndex].Count; itemIndex++)
                     {
-                        if (item.Id == Groups[groupIndex][itemIndex].Id)
+                        if (item.Id == Groups[groupIndex][itemIndex].Item.Id)
                         {
                             var targetGroupIndex = item.IsChecked ? 1 : 0;
                             if (groupIndex == targetGroupIndex)
                             {
-                                Groups[groupIndex][itemIndex] = item;
+                                Groups[groupIndex][itemIndex] = new ToDoItemViewModel(item);
                             } else
                             {
                                 Groups[groupIndex].RemoveAt(itemIndex);
-                                Groups[targetGroupIndex].Insert(0, item);
+                                Groups[targetGroupIndex].Insert(0, new ToDoItemViewModel(item));
                             }
                             return;
                         }
@@ -93,7 +93,7 @@ namespace ToDo.ViewModels
                 {
                     for (var itemIndex = 0; itemIndex < Groups[groupIndex].Count; itemIndex++)
                     {
-                        if (itemId == Groups[groupIndex][itemIndex].Id)
+                        if (itemId == Groups[groupIndex][itemIndex].Item.Id)
                         {
                             Groups[groupIndex].RemoveAt(itemIndex);
                             return;

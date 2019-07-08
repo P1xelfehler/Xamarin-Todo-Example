@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
-using ToDo.DataStore;
+using ToDo.ViewModels;
 
 namespace ToDo.Model
 {
-    public class TodoGroup: ObservableCollection<ToDoItem>
+    public class TodoGroup: ObservableCollection<ToDoItemViewModel>
     {
         public string Title { get; }
 
