@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using ToDo.Constants;
 using ToDo.DataStore;
 using ToDo.Model;
 using ToDo.Pages.Create;
 using ToDo.Pages.ToDoView;
+using ToDo.Repositories;
 using Xamarin.Forms;
 
 namespace ToDo.ViewModels
@@ -14,6 +16,10 @@ namespace ToDo.ViewModels
         public ICommand AddCommand { get; }
         public ICommand ItemSelectedCommand { get; }
         public INavigation Navigation { get; }
+
+        private Lazy<IDatabase> database = new Lazy<IDatabase>(() => new SqliteDatabase());
+
+        private IDatabase Database => database.Value;
 
         public List<TodoGroup> Groups { get; } = new List<TodoGroup> {
             new TodoGroup("Unerledigt"),
@@ -43,7 +49,7 @@ namespace ToDo.ViewModels
         private void showTodo(object parameters)
         {
             var eventArgs = parameters as ItemTappedEventArgs;
-            var item = (ToDoItem)eventArgs.Item;
+            var item = (ToDoItemViewModel)eventArgs.Item;
             var destination = new TodoViewPage(item);
             Navigation.PushAsync(destination);
         }
@@ -51,7 +57,7 @@ namespace ToDo.ViewModels
         private void loadItems()
         {
             var items = DataStorage
-                .GetInstance()
+                .GetInstance(Database)
                 .FetchItems();
             items.ForEach(item => Groups[item.IsChecked ? 1 : 0].Add(new ToDoItemViewModel(item)));
         }

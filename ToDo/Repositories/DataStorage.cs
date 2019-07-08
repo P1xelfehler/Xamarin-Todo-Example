@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using SQLite;
 using ToDo.Constants;
 using ToDo.DataStore;
+using ToDo.Repositories;
 using Xamarin.Forms;
 
 namespace ToDo
@@ -13,31 +13,26 @@ namespace ToDo
     {
         private static DataStorage instance;
 
-        private string databasePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "database.db");
+        private IDatabase Database;
 
-        private SQLiteConnection database;
-
-        private SQLiteConnection Database => database ?? (database = new SQLiteConnection(databasePath));
-
-        private DataStorage() {
-            Database.CreateTable<ToDoItem>();
-            Debug.WriteLine(databasePath);
+        private DataStorage(IDatabase database) {
+            Database = database;
         }
 
         ~DataStorage() {
             Database.Close();
         }
 
-        public static DataStorage GetInstance()
+        public static DataStorage GetInstance(IDatabase database)
         {
             if (instance == null)
             {
-                instance = new DataStorage();
+                instance = new DataStorage(database);
             }
             return instance;
         }
 
-        public List<ToDoItem> FetchItems() => Database.Table<ToDoItem>().ToList();
+        public List<ToDoItem> FetchItems() => Database.FetchItems();
 
         public void AddItem(string title)
         {
@@ -48,7 +43,7 @@ namespace ToDo
 
         public void RemoveItem(int id)
         {
-            Database.Delete<ToDoItem>(id);
+            Database.Delete(id);
             MessagingCenter.Send(this, MessengerKeys.ItemDeleted, id);
         }
 

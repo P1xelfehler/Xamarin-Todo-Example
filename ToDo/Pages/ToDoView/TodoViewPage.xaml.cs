@@ -8,10 +8,10 @@ namespace ToDo.Pages.ToDoView
     {
         private TodoViewViewModel viewModel;
 
-        public TodoViewPage(ToDoItem item)
+        public TodoViewPage(ToDoItemViewModel itemViewModel)
         {
             InitializeComponent();
-            viewModel = new TodoViewViewModel(item, Navigation);
+            viewModel = new TodoViewViewModel(itemViewModel, Navigation);
             BindingContext = viewModel;
         }
     }

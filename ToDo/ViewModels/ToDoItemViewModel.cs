@@ -5,13 +5,20 @@ namespace ToDo.ViewModels
 {
     public class ToDoItemViewModel
     {
-        public ToDoItem Item { get; }
+        private ToDoItem item;
+
+        public ToDoItem Item { get => item; }
 
         public string ImageSource => Item.IsChecked ? "check.jpg" : null;
 
         public ToDoItemViewModel(ToDoItem item)
         {
-            Item = item;
+            this.item = item;
+        }
+
+        public void ToggleChecked()
+        {
+            item.IsChecked = !item.IsChecked;
         }
     }
 }

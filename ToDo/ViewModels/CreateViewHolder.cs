@@ -1,10 +1,16 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using ToDo.Repositories;
+using Xamarin.Forms;
 
 namespace ToDo.ViewModels
 {
     public class CreateViewHolder
     {
         private string entryText = "";
+
+        private Lazy<IDatabase> database = new Lazy<IDatabase>(() => new SqliteDatabase());
+
+        private IDatabase Database => database.Value;
 
         public Command AddCommand { private set; get; }
         public string EntryText {
@@ -22,7 +28,7 @@ namespace ToDo.ViewModels
             AddCommand = new Command(() =>
             {
                 DataStorage
-                    .GetInstance()
+                    .GetInstance(Database)
                     .AddItem(EntryText);
                 Navigation.PopModalAsync();
             }, () => EntryText.Length > 0);
