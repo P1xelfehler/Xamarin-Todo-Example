@@ -11,9 +11,9 @@ namespace ToDo.ViewModels
 {
     public class OverviewViewModel
     {
-        public ICommand AddCommand { private set; get; }
-        public ICommand ItemSelectedCommand { private set; get; }
-        public INavigation Navigation { set; get; }
+        public ICommand AddCommand { get; }
+        public ICommand ItemSelectedCommand { get; }
+        public INavigation Navigation { get; }
 
         public List<TodoGroup> Groups { get; } = new List<TodoGroup> {
             new TodoGroup("Unerledigt"),
@@ -23,18 +23,8 @@ namespace ToDo.ViewModels
         public OverviewViewModel(INavigation navigation)
         {
             Navigation = navigation;
-            AddCommand = new Command(() =>
-            {
-                var destination = new CreatePage();
-                Navigation.PushModalAsync(destination);
-            });
-            ItemSelectedCommand = new Command((parameters) =>
-            {
-                var eventArgs = parameters as ItemTappedEventArgs;
-                var item = (ToDoItem)eventArgs.Item;
-                var destination = new TodoViewPage(item);
-                Navigation.PushAsync(destination);
-            });
+            AddCommand = new Command(add);
+            ItemSelectedCommand = new Command(showTodo);
             loadItems();
             registerReceivers();
         }
@@ -42,6 +32,20 @@ namespace ToDo.ViewModels
         ~OverviewViewModel()
         {
             unregisterReceivers();
+        }
+
+        private void add()
+        {
+            var destination = new CreatePage();
+            Navigation.PushModalAsync(destination);
+        }
+
+        private void showTodo(object parameters)
+        {
+            var eventArgs = parameters as ItemTappedEventArgs;
+            var item = (ToDoItem)eventArgs.Item;
+            var destination = new TodoViewPage(item);
+            Navigation.PushAsync(destination);
         }
 
         private void loadItems()
