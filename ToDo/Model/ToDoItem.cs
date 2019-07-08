@@ -1,7 +1,10 @@
-﻿namespace ToDo.DataStore
+﻿using SQLite;
+
+namespace ToDo.DataStore
 {
     public struct ToDoItem
     {
+        [PrimaryKey, AutoIncrement]
         public int Id { get; }
         public string Title { get; }
         public bool IsChecked { get; set; }

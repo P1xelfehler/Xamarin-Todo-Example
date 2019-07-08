@@ -1,12 +1,19 @@
-﻿using System.Windows.Input;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ToDo.ViewModels
 {
     public class CreateViewHolder
     {
-        public ICommand AddCommand { private set; get; }
-        public string EntryText { get; set; }
+        private string entryText = "";
+
+        public Command AddCommand { private set; get; }
+        public string EntryText {
+            get => entryText;
+            set {
+                entryText = value;
+                AddCommand.ChangeCanExecute();
+            }
+        }
         private INavigation Navigation { set; get; }
 
         public CreateViewHolder(INavigation navigation)
@@ -18,7 +25,7 @@ namespace ToDo.ViewModels
                     .GetInstance()
                     .AddItem(EntryText);
                 Navigation.PopModalAsync();
-            });
+            }, () => EntryText.Length > 0);
         }
     }
 }

@@ -21,8 +21,6 @@
         Text="{Binding EntryText}"
         Placeholder="What do you want to do?" />
 
-      <ContentView VerticalOptions="FillAndExpand" />
-
       <Button
         Text="Add TODO"
         Command="{Binding AddCommand}" />
