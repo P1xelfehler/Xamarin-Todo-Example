@@ -5,8 +5,8 @@ namespace ToDo.DataStore
     public struct ToDoItem
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; }
-        public string Title { get; }
+        public int Id { get; set; }
+        public string Title { get; set; }
         public bool IsChecked { get; set; }
         public string ImageSource
         {

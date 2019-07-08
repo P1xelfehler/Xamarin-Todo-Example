@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using SQLite;
 using ToDo.Constants;
 using ToDo.DataStore;
 using Xamarin.Forms;
@@ -9,13 +12,17 @@ namespace ToDo
     {
         private static DataStorage instance;
 
-        private List<ToDoItem> items = new List<ToDoItem> {
-            new ToDoItem(0, "Get"),
-            new ToDoItem(1, "Shit"),
-            new ToDoItem(2, "Done")
-        };
+        private string databasePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "database.db");
 
-        private DataStorage() { }
+        private SQLiteConnection database;
+
+        private SQLiteConnection Database => database ?? (database = new SQLiteConnection(databasePath));
+
+        private DataStorage() => Database.CreateTable<ToDoItem>();
+
+        ~DataStorage() {
+            Database.Close();
+        }
 
         public static DataStorage GetInstance()
         {
@@ -26,42 +33,25 @@ namespace ToDo
             return instance;
         }
 
-        public List<ToDoItem> FetchItems()
-        {
-            return items;
-        }
+        public List<ToDoItem> FetchItems() => Database.Table<ToDoItem>().ToList();
 
         public void AddItem(string title)
         {
-            var item = new ToDoItem(items.Count, title);
-            items.Add(item);
+            var item = new ToDoItem(0, title);
+            Database.Insert(item);
             MessagingCenter.Send(this, MessengerKeys.ItemAdded, item);
         }
 
         public void RemoveItem(int id)
         {
-            for (var i = 0; i < items.Count; i++)
-            {
-                if (items[i].Id == id)
-                {
-                    items.RemoveAt(i);
-                    MessagingCenter.Send(this, MessengerKeys.ItemDeleted, id);
-                    break;
-                }
-            }
+            Database.Delete<ToDoItem>(id);
+            MessagingCenter.Send(this, MessengerKeys.ItemDeleted, id);
         }
 
         public void UpdateItem(ToDoItem item)
         {
-            for (var i = 0; i < items.Count; i++)
-            {
-                if (items[i].Id == item.Id)
-                {
-                    items[i] = item;
-                    MessagingCenter.Send(this, MessengerKeys.ItemChanged, item);
-                    break;
-                }
-            }
+            Database.Update(item);
+            MessagingCenter.Send(this, MessengerKeys.ItemChanged, item);
         }
     }
 }
