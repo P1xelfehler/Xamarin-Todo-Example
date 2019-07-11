@@ -8,7 +8,9 @@ namespace ToDo.ViewModels
 {
     public class ToDoItemViewModel
     {
-        private Lazy<IDatabase> database = new Lazy<IDatabase>(() => new SqliteDatabase());
+        private Lazy<DataStorage> dataStorage = new Lazy<DataStorage>(() => DataStorage.GetInstance(new SqliteDatabase()));
+
+        private DataStorage DataStorage => dataStorage.Value;
 
         private ToDoItem item;
 
@@ -23,8 +25,7 @@ namespace ToDo.ViewModels
             this.item = item;
             DeleteCommand = new Command(parameters =>
             {
-                var storage = DataStorage.GetInstance(database.Value);
-                storage.RemoveItem(item.Id);
+                DataStorage.RemoveItem(item.Id);
             });
         }
 

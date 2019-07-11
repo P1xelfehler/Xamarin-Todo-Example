@@ -8,7 +8,7 @@ namespace ToDo.Pages.Create
         public CreatePage()
         {
             InitializeComponent();
-            BindingContext = new CreateViewHolder(Navigation);
+            BindingContext = new CreateViewModel(Navigation);
         }
     }
 }

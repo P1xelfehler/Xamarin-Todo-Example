@@ -18,9 +18,9 @@ namespace ToDo.ViewModels
         public ICommand ItemSelectedCommand { get; }
         public INavigation Navigation { get; }
 
-        private Lazy<IDatabase> database = new Lazy<IDatabase>(() => new SqliteDatabase());
+        private Lazy<DataStorage> dataStorage = new Lazy<DataStorage>(() => DataStorage.GetInstance(new SqliteDatabase()));
 
-        private IDatabase Database => database.Value;
+        private DataStorage DataStorage => dataStorage.Value;
 
         public List<TodoGroup> Groups { get; } = new List<TodoGroup> {
             new TodoGroup("Unerledigt"),
@@ -57,13 +57,11 @@ namespace ToDo.ViewModels
 
         private void loadItems()
         {
-            var task = DataStorage
-                .GetInstance(Database)
-                .FetchItems();
+            var task = DataStorage.FetchItems();
 
             Task.Run(async () =>
             {
-                var items = await DataStorage.GetInstance(Database).FetchItems();
+                var items = await DataStorage.FetchItems();
 
                 Device.BeginInvokeOnMainThread(() =>
                 {

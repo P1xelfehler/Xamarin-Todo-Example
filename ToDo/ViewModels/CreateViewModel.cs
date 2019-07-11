@@ -4,13 +4,13 @@ using Xamarin.Forms;
 
 namespace ToDo.ViewModels
 {
-    public class CreateViewHolder
+    public class CreateViewModel
     {
         private string entryText = "";
 
-        private Lazy<IDatabase> database = new Lazy<IDatabase>(() => new SqliteDatabase());
+        private Lazy<DataStorage> dataStorage = new Lazy<DataStorage>(() => DataStorage.GetInstance(new SqliteDatabase()));
 
-        private IDatabase Database => database.Value;
+        private DataStorage DataStorage => dataStorage.Value;
 
         public Command AddCommand { private set; get; }
         public string EntryText {
@@ -22,14 +22,12 @@ namespace ToDo.ViewModels
         }
         private INavigation Navigation { set; get; }
 
-        public CreateViewHolder(INavigation navigation)
+        public CreateViewModel(INavigation navigation)
         {
             Navigation = navigation;
             AddCommand = new Command(() =>
             {
-                DataStorage
-                    .GetInstance(Database)
-                    .AddItem(EntryText);
+                DataStorage.AddItem(EntryText);
                 Navigation.PopModalAsync();
             }, () => EntryText.Length > 0);
         }
