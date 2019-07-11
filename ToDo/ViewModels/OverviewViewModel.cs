@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ToDo.Constants;
@@ -16,6 +17,7 @@ namespace ToDo.ViewModels
     {
         public ICommand AddCommand { get; }
         public ICommand ItemSelectedCommand { get; }
+        public ICommand DeleteCommand { get; }
         public INavigation Navigation { get; }
 
         private Lazy<IDatabase> database = new Lazy<IDatabase>(() => new SqliteDatabase());
@@ -32,6 +34,11 @@ namespace ToDo.ViewModels
             Navigation = navigation;
             AddCommand = new Command(add);
             ItemSelectedCommand = new Command(showTodo);
+            DeleteCommand = new Command(parameters =>
+            {
+                Debug.WriteLine("Delete item");
+                Debug.WriteLine(parameters);
+            });
             loadItems();
             registerReceivers();
         }

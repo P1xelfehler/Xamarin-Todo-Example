@@ -4,18 +4,26 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
   <DataTemplate x:Key="TodoCellStyle">
-        
+
     <ViewCell>
-            
+
+      <ViewCell.ContextActions>
+
+        <MenuItem
+          Text="Delete"
+          Command="{Binding DeleteCommand}"
+          IsDestructive="true" />
+      </ViewCell.ContextActions>
+
       <StackLayout
         Padding="16"
         Orientation="Horizontal"
         VerticalOptions="Center">
-                
+
         <Label Text="{Binding Item.Title}" />
-                
+
         <ContentView HorizontalOptions="FillAndExpand" />
-                
+
         <Image Source="{Binding ImageSource}" />
       </StackLayout>
     </ViewCell>
