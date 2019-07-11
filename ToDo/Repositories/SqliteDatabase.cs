@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using SQLite;
 using ToDo.DataStore;
 
@@ -9,37 +10,37 @@ namespace ToDo.Repositories
     public class SqliteDatabase: IDatabase
     {
         private string databasePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "database.db");
-        private SQLiteConnection Connection;
+        private SQLiteAsyncConnection Connection;
 
         public SqliteDatabase()
         {
-            Connection = new SQLiteConnection(databasePath);
-            Connection.CreateTable<ToDoItem>();
+            Connection = new SQLiteAsyncConnection(databasePath);
+            Connection.CreateTableAsync<ToDoItem>();
         }
 
-        public void Close()
+        public async Task Close()
         {
-            Connection.Close();
+            await Connection.CloseAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            Connection.Delete<ToDoItem>(id);
+            await Connection.DeleteAsync<ToDoItem>(id);
         }
 
-        public List<ToDoItem> FetchItems()
+        public async Task<List<ToDoItem>> FetchItems()
         {
-            return Connection.Table<ToDoItem>().ToList();
+            return await Connection.Table<ToDoItem>().ToListAsync();
         }
 
-        public void Insert(ToDoItem item)
+        public async Task Insert(ToDoItem item)
         {
-            Connection.Insert(item);
+            await Connection.InsertAsync(item);
         }
 
-        public void Update(ToDoItem item)
+        public async Task Update(ToDoItem item)
         {
-            Connection.Update(item);
+            await Connection.UpdateAsync(item);
         }
     }
 }

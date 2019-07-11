@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ToDo.DataStore;
 
 namespace ToDo.Repositories
 {
     public interface IDatabase
     {
-        List<ToDoItem> FetchItems();
+        Task<List<ToDoItem>> FetchItems();
 
-        void Insert(ToDoItem item);
+        Task Insert(ToDoItem item);
 
-        void Update(ToDoItem item);
+        Task Update(ToDoItem item);
 
-        void Delete(int id);
+        Task Delete(int id);
 
-        void Close();
+        Task Close();
     }
 }

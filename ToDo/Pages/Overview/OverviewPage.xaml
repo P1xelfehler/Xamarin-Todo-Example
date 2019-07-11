@@ -4,8 +4,17 @@
   x:Class="ToDo.Pages.Overview.OverviewPage"
   xmlns="http://xamarin.com/schemas/2014/forms"
   xmlns:behaviors="clr-namespace:ToDo.Behaviors"
+  xmlns:resources="clr-namespace:ToDo.Resources"
   xmlns:viewModels="clr-namespace:ToDo.ViewModels"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <resources:TodoCellStyle />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </ContentPage.Resources>
 
   <ContentPage.ToolbarItems>
 
@@ -20,6 +29,7 @@
       x:Name="listView"
       GroupDisplayBinding="{Binding Title}"
       IsGroupingEnabled="true"
+      ItemTemplate="{StaticResource TodoCellStyle}"
       ItemsSource="{Binding Groups}"
       RowHeight="50">
 
@@ -28,24 +38,6 @@
           Command="{Binding ItemSelectedCommand}"
           EventName="ItemTapped" />
       </ListView.Behaviors>
-
-      <ListView.ItemTemplate>
-
-        <DataTemplate>
-
-          <ViewCell>
-
-            <StackLayout
-              Padding="16"
-              Orientation="Horizontal"
-              VerticalOptions="Center">
-              <Label Text="{Binding Item.Title}" />
-              <ContentView HorizontalOptions="FillAndExpand" />
-              <Image Source="{Binding ImageSource}" />
-            </StackLayout>
-          </ViewCell>
-        </DataTemplate>
-      </ListView.ItemTemplate>
     </ListView>
   </ContentPage.Content>
 </ContentPage>

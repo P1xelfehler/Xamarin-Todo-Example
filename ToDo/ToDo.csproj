@@ -25,6 +25,10 @@
     <Folder Include="Behaviors\" />
     <Folder Include="Repositories\" />
     <Folder Include="Constants\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Resources.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Pages\Overview\Overview.xaml.cs">

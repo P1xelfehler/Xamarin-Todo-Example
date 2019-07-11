@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using ToDo.Constants;
 using ToDo.DataStore;
@@ -56,10 +57,20 @@ namespace ToDo.ViewModels
 
         private void loadItems()
         {
-            var items = DataStorage
+            var task = DataStorage
                 .GetInstance(Database)
                 .FetchItems();
-            items.ForEach(item => Groups[item.IsChecked ? 1 : 0].Add(new ToDoItemViewModel(item)));
+
+            Task.Run(async () =>
+            {
+                var items = await DataStorage.GetInstance(Database).FetchItems();
+
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    items.ForEach(item => Groups[item.IsChecked ? 1 : 0].Add(new ToDoItemViewModel(item)));
+                });
+            });
+            
         }
 
         private void registerReceivers()

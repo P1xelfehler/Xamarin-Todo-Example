@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ToDo.Constants;
 using ToDo.DataStore;
 using ToDo.Repositories;
@@ -32,7 +30,7 @@ namespace ToDo
             return instance;
         }
 
-        public List<ToDoItem> FetchItems() => Database.FetchItems();
+        public async Task<List<ToDoItem>> FetchItems() => await Database.FetchItems();
 
         public void AddItem(string title)
         {
